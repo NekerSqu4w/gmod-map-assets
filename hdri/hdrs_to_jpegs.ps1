@@ -20,7 +20,7 @@ Get-ChildItem -Path $inputDir -Filter "*.hdr" | ForEach-Object {
         Write-Host "converting file $outputFileName" -ForegroundColor Yellow
 		
 		$startTime = Get-Date
-		& ffmpeg -loglevel error -i $inputFile -vf "format=rgb24" -q:v 2 $outputFile
+		& ffmpeg -loglevel error -i $inputFile -vf "tonemap=reinhard,format=yuvj420p" -q:v 1 $outputFile
 		$endTime = Get-Date
 		$duration = $endTime - $startTime
 		
@@ -36,5 +36,5 @@ Get-ChildItem -Path $inputDir -Filter "*.hdr" | ForEach-Object {
     Start-Sleep -Milliseconds 20 # just in case we have alot of files
 }
 
-Write-Host "all conversions done." -ForegroundColor Magenta
+Write-Host "all conversions to jpeg done." -ForegroundColor Magenta
 pause
