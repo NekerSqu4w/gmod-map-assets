@@ -18,11 +18,11 @@ Get-ChildItem -Path $inputDir -Filter "*.hdr" | ForEach-Object {
     }
     else {
         Write-Host "converting file $outputFileName" -ForegroundColor Yellow
-        
+		
 		$startTime = Get-Date
-        & ffmpeg -loglevel error -i $inputFile -vf "format=rgb24" -q:v 2 $outputFile
-        $endTime = Get-Date
-        $duration = $endTime - $startTime
+		& ffmpeg -loglevel error -i $inputFile -vf "format=rgb24" -q:v 2 $outputFile
+		$endTime = Get-Date
+		$duration = $endTime - $startTime
 		
         if ($LASTEXITCODE -eq 0) {
 			$timeTaken = [math]::Round($duration.TotalMilliseconds)
